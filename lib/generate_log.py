@@ -10,18 +10,21 @@ def fetch_data():
 
 
 def generate_log(data):
-    # TODO: Implement log generation logic
-    # Validate input check if is a list
+    # STEP 1: Validate input (must be a list)
     if not isinstance(data, list):
-        raise TypeError("Data must be a list")
-    
+        raise ValueError("data must be a list")
 
-    # STEP 2: Generate a filename with today's date (e.g., "log_20250408.txt")
+    # STEP 2: Generate filename with today's date
     filename = f"log_{datetime.now().strftime('%Y%m%d')}.txt"
-    with open(filename, "w") as file:  # STEP 3: Write the log entries to a file using File I/O
+
+    # STEP 3: Write entries to the file (creates empty file if data == [])
+    with open(filename, "w") as file:
         for entry in data:
             file.write(f"{entry}\n")
-    print(f"Log written to {filename}")# STEP 4: Print a confirmation message with the filename
+
+    # STEP 4: Print confirmation and RETURN the filename for tests
+    print(f"Log written to {filename}")
+    return filename
 
 if __name__ == "__main__":
     post = fetch_data()
